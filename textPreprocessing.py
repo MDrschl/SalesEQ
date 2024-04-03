@@ -6,12 +6,10 @@ from stop_words import get_stop_words
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize, wordpunct_tokenize, sent_tokenize,WhitespaceTokenizer
 from nltk.tokenize.treebank import TreebankWordTokenizer, TreebankWordDetokenizer
+from nltk.corpus import wordnet
 
 
-
-
-
-class textPreprocessor:
+class TextPreprocessor:
     def toLower(self,text): #take input as string of text
         return text.lower()
     
@@ -28,9 +26,6 @@ class textPreprocessor:
             tokenizer = TreebankWordTokenizer()
             return tokenizer.tokenize(text)
 
-            
-
-        
     
     def removeStopwords(self, word_list): #take input as list of words
         nltk.download('stopwords')
@@ -49,12 +44,21 @@ class textPreprocessor:
         output = [wnl.lemmatize(word) for word in word_list]
 
         return output
+    
+    def removeSynonyms(self, word_list): #take input as a list of words
+        syns = []
+        for i in range(len(word_list)):
+            if word_list[i] in set(syns): #the word is a synonym of other words appeared before
+                word_list[i] = ""
 
-
-
-
-
-
+            else: 
+                #find synonyms
+                for s in wordnet.synsets(word_list[i]):
+                    for lem in s.lemmas():
+                        syns.append(lem.name())
+        return  list(filter(lambda a: a != "", word_list))
+       
+           
 
 
 
