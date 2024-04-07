@@ -64,72 +64,80 @@ class TextPreprocessor:
    
     def tagPOS(self, word_list): ##take input as a list of words
        return  nltk.pos_tag(word_list)
-           
-           
-
-
-
-
-
-def main():
-    #download essential lib
-    """
-    nltk.download('stopwords')
-    nltk.download('wordnet')
-    nltk.download('punkt')
-    nltk.download('averaged_perceptron_tagger')
-    """
-    #test with scrapped_articles.csv
-    tp = TextPreprocessor()
-    articles_df = pd.read_csv("./SalesEQ/scrapped_articles.csv",index_col = 0)[:500] 
-    cleaned_data = {"newHeadline":[],"newText":[]}
     
-    for i in range(len(articles_df)):  
-        #lowercasing
-        headline = tp.toLower(articles_df.loc[i,"Headline"])
-        text = tp.toLower(articles_df.loc[i,"Text"])
+    def process(self, articles_df):
+        #download essential lib
+        """
+        nltk.download('stopwords')
+        nltk.download('wordnet')
+        nltk.download('punkt')
+        nltk.download('averaged_perceptron_tagger')
+        """
+        #test with scrapped_articles.csv
+        cleaned_data = {"newHeadline":[],"newText":[]}
 
-        #remove special characters
-        headline = tp.removeSpecChar(headline)
-        text = tp.removeSpecChar(text)
+    
+        for i in range(len(articles_df)):  
+            # to test if there is any articles with unreasonably short length - result normal
+            """
+            pattern = r'[^0-9\s]'
+            count = int(re.sub(pattern, "", articles_df.loc[i,"Word_count"]))
+            if count < 20:
+                print(articles_df.loc[i,"Word_count"])
+            """
+            
+            #lowercasing
+            headline = self.toLower(articles_df.loc[i,"Headline"])
+            text = self.toLower(articles_df.loc[i,"Text"])
+
+            #remove special characters
+            headline = self.removeSpecChar(headline)
+            text = self.removeSpecChar(text)
 
 
-        #tokenization
-        headline = tp.tokenize(headline, mode = "w")
-        text = tp.tokenize(text, mode = "w")
+            #tokenization
+            headline = self.tokenize(headline, mode = "w")
+            text = self.tokenize(text, mode = "w")
 
-        #remove stopwords
-        headline = tp.remvStopwords(headline)
-        text = tp.remvStopwords(text)
+            #remove stopwords
+            headline = self.remvStopwords(headline)
+            text = self.remvStopwords(text)
 
-        #lemmatize
-        headline = tp.lemmatizate(headline)
-        text = tp.lemmatizate(text)
+            #lemmatize
+            headline = self.lemmatizate(headline)
+            text = self.lemmatizate(text)
 
-        #remove synonym
-        headline = tp.remvSynonyms(headline)
-        text = tp.remvSynonyms(text)
+            #remove synonym
+            headline = self.remvSynonyms(headline)
+            text = self.remvSynonyms(text)
 
 
+            headline = " ".join(headline)
+            text = " ".join(text)
+            
+            cleaned_data["newHeadline"].append(headline)
+            cleaned_data["newText"].append(text)
 
-        headline = " ".join(headline)
-        text = " ".join(text)
+        articles_df["newHeadline"] = cleaned_data["newHeadline"]
+        articles_df["newText"] = cleaned_data["newText"]
+
+        return articles_df
         
-        cleaned_data["newHeadline"].append(headline)
-        cleaned_data["newText"].append(text)
-
-    articles_df["newHeadline"] = cleaned_data["newHeadline"]
-    articles_df["newText"] = cleaned_data["newText"]
-
-    #print(articles_df)
-    #articles_df.to_csv("./SalesEQ/result.csv",index = False)
 
         
    
 
 
-    
 
+
+           
+
+def main():
+    tp = TextPreprocessor()
+    articles_df = pd.read_csv("scrapped_articles.csv",index_col = 0)[:500]
+    processed_df = tp.process(articles_df)
+    #print(processed_df)
+    #processed_df.to_csv("./SalesEQ/result.csv",index = False)
 
 
 if __name__ == '__main__':
