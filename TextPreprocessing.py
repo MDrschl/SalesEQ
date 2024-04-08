@@ -64,6 +64,25 @@ class TextPreprocessor:
    
     def tagPOS(self, word_list): ##take input as a list of words
        return  nltk.pos_tag(word_list)
+           
+           
+
+
+
+
+
+def main():
+    #download essential lib
+    """
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    nltk.download('punkt')
+    nltk.download('averaged_perceptron_tagger')
+    """
+    #test with scrapped_articles.csv
+    tp = TextPreprocessor()
+    articles_df = pd.read_csv("Text_data/scrapped_articles.csv",index_col = 0)[:500] 
+    cleaned_data = {"newHeadline":[],"newText":[]}
     
     def process(self, articles_df):
         #download essential lib
@@ -123,6 +142,14 @@ class TextPreprocessor:
 
         return articles_df
         
+        cleaned_data["newHeadline"].append(headline)
+        cleaned_data["newText"].append(text)
+
+    articles_df["newHeadline"] = cleaned_data["newHeadline"]
+    articles_df["newText"] = cleaned_data["newText"]
+
+    print(articles_df)
+    articles_df.to_csv("Text_data/cleaned_data.csv",index = False)
 
         
    
