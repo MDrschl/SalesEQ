@@ -24,7 +24,11 @@ The overarching objective of our project will be to predict smartphone sales in 
 ## Dataset
 Our full dataset is stored in the [google drive](https://drive.google.com/drive/folders/1t0VqvahJ8TU7xbR--bmxS6kswSmw0B1r?usp=sharing). You can download the data from this link and put it with the following path:
 
-
+## Environment setup
+Run the following code in the terminal to download necessary packages:
+```
+pip install -r requirements.txt
+```
 
 ## Run the sentiment LDA
 To run the sentiment LDA model, you first need to download the dictionary `sentiwordnet` from `nltk`:
