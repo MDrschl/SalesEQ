@@ -34,3 +34,5 @@ import nltk
 nltk.download('sentiwordnet')
 ```
 
+### Run the sample trial in the reference repo
+The code has already been adjusted to make sure it works for the current packages versions. Simply run the code of `amazon_trail.ipynb` can provide the top25 positive and negative words from the given datasets.
