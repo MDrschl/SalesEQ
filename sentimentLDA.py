@@ -195,10 +195,13 @@ class SentimentLDAGibbsSampler:
         probabilities_ts = np.ones((self.numTopics, self.numSentiments))
         firstFactor = (self.n_dt[d] + self.alpha) / \
             (self.n_d[d] + self.numTopics * self.alpha)
+        
         secondFactor = (self.n_dts[d, :, :] + self.gamma) / \
             (self.n_dt[d, :] + self.numSentiments * self.gamma)[:, np.newaxis]
+        
         thirdFactor = (self.n_vts[v, :, :] + self.beta) / \
             (self.n_ts + self.n_vts.shape[0] * self.beta)
+        
         probabilities_ts *= firstFactor[:, np.newaxis]
         probabilities_ts *= secondFactor * thirdFactor
         probabilities_ts /= np.sum(probabilities_ts)
