@@ -226,6 +226,8 @@ class SentimentLDAGibbsSampler:
         Returns top K discriminative words for topic t and sentiment s
         ie words v for which p(v | t, s) is maximum
         """
+
+        results = []
         pseudocounts = np.copy(self.n_vts)
         normalizer = np.sum(pseudocounts, (0))
         pseudocounts /= normalizer[np.newaxis, :, :]
@@ -233,7 +235,9 @@ class SentimentLDAGibbsSampler:
             for s in range(self.numSentiments):
                 topWordIndices = pseudocounts[:, t, s].argsort()[-1:-(K + 1):-1]
                 vocab = self.vectorizer.get_feature_names_out()
-                print(t, s, [vocab[i] for i in topWordIndices])
+                results.append([t, s, [vocab[i] for i in topWordIndices]])
+        
+        return results
 
 
     def run(self, reviews, maxIters=30, saveAs=None, saveOverride=False):
