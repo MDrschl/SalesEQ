@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import os as os
-import matplotlib.pyplot as plt
 import yfinance as yf
 import pandas_datareader.data as pdr
 

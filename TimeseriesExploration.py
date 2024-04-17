@@ -27,7 +27,7 @@ plt.show()
 
 
 #From inspecting the graphs, we can clearly see non-stationary features from all variables under consideration, suggesting to difference/fitting and ARIMA model
-#We can further test the hypothesis of stationarity by testing for unit roots using the Augemented Dickey fuller test. To test for autocorrelation, we use the Ljung-Box test.
+# We can further test the hypothesis of stationarity by testing for unit roots using the Augemented Dickey fuller test. To test for autocorrelation, we use the Ljung-Box test.
 
 def perform_adf_test(series):
     result = adfuller(series, autolag='AIC')
@@ -48,6 +48,7 @@ for column in df.columns:
 
 #From the results we can infer that there is strong evidence against the hypothesis of stationarity for almost all time series, except for the unemployment rate.
 # Although, visual insepction suggests a trend component presnet in the data, which speaks for the presence of a unit root.
+# Differencing reduces or eliminates these characteristics, aiming for stationarity.
 
 
 def perform_ljungbox_test(series, lags=10):
@@ -69,4 +70,4 @@ for column in df.columns:
 #The test results give us strong evidence for autocorrelation in the data.
 # The AR part of the model captures the relationship between a variable's current value and its previous values.
 # If data show autocorrelation, it means past values have a correlation with current values, which the AR part can model effectively.
-# Differencing reduces or eliminates these characteristics, aiming for stationarity.
+

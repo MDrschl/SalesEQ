@@ -5,16 +5,25 @@
 # Third section: Testing for model performance improvement when including sentiment scores and economic variables
 # Fourth section: Fitting LSTM model for comparison, again with base case, including only sentiment scores, and including both sentiment scores and economic variables
 
-# The aim of our research is not to identify any multicolliniearity, endogeneity, the only purpose is to test in all subsequent scripts whether prediction power of two different models can be improved
+# The aim of our research is not to identify multicollinearity, endogeneity, the only purpose is to test in all the following scripts whether the predictive power of two different models can be improved.
 
 import pandas as pd
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
+
 df = pd.read_csv('finalDF.csv', index_col='Date', parse_dates=True)
-dependent_var = df['price']
+train = df[:'2020-01-01']
+test = df['2020-01-02':]
 
-exog_vars = df["msci"]
+pricetrain = train["price"]
+pricetest = test["price"]
 
-model = SARIMAX(dependent_var, exog=exog_vars, order=(3,3,2))
+exotrain = train.drop(columns=["price"])
+exotest = test.drop(columns=["price"])
+
+#First section
+
+
+model = SARIMAX(pricetrain, exog=exotrain, order=(3,3,2))
 results = model.fit()
 print(results.summary())
