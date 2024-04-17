@@ -34,7 +34,7 @@ Upon entering this page, there are plenty of options to be toggled or adjusted t
 
 <img src="../images/Blogs/Blog_2/img_7.png" alt="Input Code" width="150" height="150">
 
-1. Search and select
+3. Search and select
 
 ![Input Code](../images/Blogs/Blog_2/img_8.png)
 ![Input Code](../images/Blogs/Blog_2/img_9.png)
