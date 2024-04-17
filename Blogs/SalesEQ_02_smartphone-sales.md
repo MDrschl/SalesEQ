@@ -29,11 +29,13 @@ Upon entering this page, there are plenty of options to be toggled or adjusted t
 ![Input Code](../images/Blogs/Blog_2/img_5.png)
 
 2. Dropdown menu selection
+
 ![Input Code](../images/Blogs/Blog_2/img_6.png)
 
 <img src="../images/Blogs/Blog_2/img_7.png" alt="Input Code" width="150" height="150">
 
-3. Search and select
+1. Search and select
+
 ![Input Code](../images/Blogs/Blog_2/img_8.png)
 ![Input Code](../images/Blogs/Blog_2/img_9.png)
 
@@ -42,6 +44,7 @@ Upon entering this page, there are plenty of options to be toggled or adjusted t
 
 ### 1
 There are plenty of hiccups throughout the process of interacting with this query page. Sometimes the pages took too long to load, causing timeout exceptions and sometimes we accidentally intervened with my mouse and the search bar does not return an option for us to select. On very rare occasions, the page is not properly loaded and is displayed in a html format or the html tags mysteriously change slightly to throw us a curveball. Considering we would like to scrape articles from each month across 10 years, this process has to be repeated 120 times and the myriad of errors has been rather frustrating. However, this is part of web scraping, trial-and-error to ensure the robustness of the code.
+
 ![Input Code](../images/Blogs/Blog_2/img_10.png)
 
 
@@ -52,6 +55,7 @@ The search result page is rather standard with a clear ‘row-by-row’ structur
 
 ### 3
 Looping through these articles presents some issues as well. For instance, the server would return a gateway error, which is rare but rather unfixable. On the other hand, it is quite common that during the process of going back to the search result page, the page would somehow go all the way back to the query page. The tricky part is that the query is partially deleted i.e. data sources reset and the html tags would differ slightly, which takes extra effort to handle and not disrupt the scrapping. Eventually, the run took about 8-9 hours to complete.
+
 ![Input Code](../images/Blogs/Blog_2/img_12.png)
 
 ## Final remark from the main contributor of this part
