@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 MONTH_START_LIST = []
 
 for year in range(2012, 2023):
-    for month in range(1, 12):
+    for month in range(1, 13):
         MONTH_START_LIST.append(f'{year}-{str(month).zfill(2)}-01')
         
 MONTH_END_LIST = (pd.to_datetime(MONTH_START_LIST) + MonthEnd(1)).strftime('%Y-%m-%d').tolist()
