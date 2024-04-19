@@ -8,6 +8,13 @@ Tags: Group SalesEQ
 ### Main Contributer for this blog: Ricky Choi (Data Cleaning), Zixian Fan (Data Analysis)
 
 ## Data Cleaning
+Data Cleaning is an important part in text preprocessing as it determines the quality of data and hence the performance of the model. The goal of text preprocessing is to remove redundant text that does not help with explaining the sentiment of the articles, and to unify the formats of the texts. 
+
+The first step of cleaning is to check for presence for abnormal data in the scraped csv file. From my personal experience, abnormal data may be some meaningless data with very little word count. Therefore, we checked for any news articles with word count below 20 words, and fortunately no abnormal data was discovered in the csv file. 
+
+Next, we converted all texts to lowercases, followed by removal of redundant data such as stop words, special characters, numbers, and synonyms. Then we performed lemmatization to reduce words into their root form. Details will be covered in the report.
+
+There are a few limitations we encountered during data cleaning. First, spelling mistakes cannot be eliminated. There are no patterns for spelling mistakes, and it is not impossible to do eyeball check on all words and correct them. Given the sources of text are mainly reputable newspapers such as the New York Times and the Washington Post, error due to spelling mistakes can be neglected. Second, the original meaning of some words may be lost after transformation. For instance, “U.S.” becomes “us” after lowercasing and removal of punctuation. It may be misrecognized as the pronoun “us” instead of a country. We believe this problem does not occur frequently and hence it can be neglected. 
 
 
 ## Data Analysis
