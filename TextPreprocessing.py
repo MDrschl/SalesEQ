@@ -80,6 +80,7 @@ class TextPreprocessor:
     
         for i in range(len(articles_df)):  
             # to test if there is any articles with unreasonably short length - result normal
+            # the word count column is removed in the master data csv
             """
             pattern = r'[^0-9\s]'
             count = int(re.sub(pattern, "", articles_df.loc[i,"Word_count"]))
@@ -122,7 +123,7 @@ class TextPreprocessor:
         articles_df["newHeadline"] = cleaned_data["newHeadline"]
         articles_df["newText"] = cleaned_data["newText"]
 
-        articles_df.to_csv("Text_data/cleaned_data.csv",index = False)
+       # articles_df.to_csv("Text_data/cleaned_data.csv",index = False)
 
         return articles_df
     
@@ -138,8 +139,8 @@ class TextPreprocessor:
 
 def main():
     tp = TextPreprocessor()
-    #articles_df = pd.read_csv("scrapped_articles.csv",index_col = 0)[:500]
-    processed_df = tp.process(articles_df)
+    #articles_df = pd.read_csv("scrapped_articles.csv",index_col = 0)
+    #processed_df = tp.process(articles_df)
     #print(processed_df)
     #processed_df.to_csv("./SalesEQ/result.csv",index = False)
 
